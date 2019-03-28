@@ -12,8 +12,6 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 var Duck = /** @class */ (function () {
-    //protected flyBehaviour: FlyBehaviour
-    //protected quackBehaviour: QuackBehaviour
     function Duck(flyBehaviour, quackBehaviour) {
         this.flyBehaviour = flyBehaviour;
         this.quackBehaviour = quackBehaviour;
@@ -46,7 +44,7 @@ var FlyWithNoWings = /** @class */ (function () {
     function FlyWithNoWings() {
     }
     FlyWithNoWings.prototype.fly = function () {
-        console.log("I cannot flying");
+        console.log("I cannot fly");
     };
     return FlyWithNoWings;
 }());
@@ -65,9 +63,7 @@ var Squeak = /** @class */ (function () {
 var MuteQuack = /** @class */ (function () {
     function MuteQuack() {
     }
-    MuteQuack.prototype.quack = function () {
-        console.log("---");
-    };
+    MuteQuack.prototype.quack = function () { console.log("---"); };
     return MuteQuack;
 }());
 var DecoyDuck = /** @class */ (function (_super) {
@@ -93,7 +89,7 @@ var MallardDuck = /** @class */ (function (_super) {
 var RubberDuck = /** @class */ (function (_super) {
     __extends(RubberDuck, _super);
     function RubberDuck() {
-        return _super.call(this, new FlyWithNoWings(), new Squeak()) || this;
+        return _super.call(this, new FlyWithNoWings(), new MuteQuack()) || this;
     }
     RubberDuck.prototype.display = function () {
         console.log("I'm a RubberDuck!");
@@ -103,4 +99,6 @@ var RubberDuck = /** @class */ (function (_super) {
 var mallard = new MallardDuck();
 mallard.performQuack();
 mallard.setQuackBehavior(new Squeak());
+mallard.performQuack();
+mallard.setQuackBehavior(new MuteQuack());
 mallard.performQuack();
