@@ -1,12 +1,8 @@
 abstract class Duck {
 
-    //protected flyBehaviour: FlyBehaviour
-
-    //protected quackBehaviour: QuackBehaviour
-
-    constructor(private flyBehaviour: FlyBehaviour,private quackBehaviour: QuackBehaviour) {
-
-    }
+    constructor(private flyBehaviour: FlyBehaviour, 
+                private quackBehaviour: QuackBehaviour) 
+    {}
 
     performQuack() {
         this.quackBehaviour.quack();
@@ -32,7 +28,7 @@ abstract class Duck {
 }
 
 interface FlyBehaviour {
-    fly();
+    fly()
 }
 
 class FlyWithWings implements FlyBehaviour {
@@ -45,13 +41,12 @@ class FlyWithWings implements FlyBehaviour {
 class FlyWithNoWings implements FlyBehaviour {
 
     fly() {
-        console.log("I cannot flying");
+        console.log("I cannot fly");
     }
 }
 
-
 interface QuackBehaviour {
-    quack();
+    quack()
 }
 
 class Quack implements QuackBehaviour {
@@ -66,15 +61,13 @@ class Squeak implements QuackBehaviour {
 
 class MuteQuack implements QuackBehaviour {
 
-    quack() {
-        console.log("---");
-    }
+    quack() { console.log("---"); }
 }
 
 class DecoyDuck extends Duck {
 
     constructor() {
-        super(new FlyWithNoWings(),new MuteQuack())
+        super(new FlyWithNoWings(), new MuteQuack())
     }
 
     display() {
@@ -87,7 +80,7 @@ class MallardDuck extends Duck {
     constructor() {
         super(new FlyWithWings(), new Quack())
     }
-       
+
     display() {
         console.log("I'm a MallardDuck!");
     }
@@ -96,8 +89,7 @@ class MallardDuck extends Duck {
 class RubberDuck extends Duck {
 
     constructor() {
-        super(new FlyWithNoWings(),new Squeak() )
-
+        super(new FlyWithNoWings(), new MuteQuack())
     }
 
     display() {
@@ -109,6 +101,12 @@ var mallard = new MallardDuck();
 
 mallard.performQuack();
 
-mallard.setQuackBehavior(new Squeak())
+mallard.setQuackBehavior(new Squeak());
 
 mallard.performQuack();
+
+mallard.setQuackBehavior(new MuteQuack());
+
+mallard.performQuack();
+
+
