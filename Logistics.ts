@@ -1,15 +1,19 @@
-interface ITransport {
+abstract class ITransport {
 
-    deliver(): void
+    public abstract deliver(): void
+
+    public showLogo(): void {
+        console.log("My company logo");
+    }
 }
 
-class Truck implements ITransport {
+class Truck extends ITransport {
 
     public deliver(): void {
          console.log("The delivery of the goods has been carried out by land.");
     }
 }
-class Ship implements ITransport {
+class Ship extends ITransport {
 
     public deliver(): void {
         console.log("The delivery of the goods has been carried out by sea.");
@@ -36,9 +40,17 @@ truck.deliver();
 
 console.log("");
 
+truck.showLogo();
+
+console.log("");
+
 const ship  = vehicleFactory.makeNewVehicle("byTheSea")
 
 ship.deliver();
+
+console.log("");
+
+ship.showLogo();
 
 console.log("");
 
