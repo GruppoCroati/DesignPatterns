@@ -1,68 +1,44 @@
-abstract class Logistics {
+interface ITransport {
 
-    public abstract createTransport(): LogisticTransport;
+    deliver(): void
+}
 
-    public planDelivery(): string {
+class Truck implements ITransport {
 
-        const vehicle = this.createTransport();
+    public deliver(): void {
+         console.log("The delivery of the goods has been carried out by land.");
+    }
+}
+class Ship implements ITransport {
 
-        return vehicle.deliver();
+    public deliver(): void {
+        console.log("The delivery of the goods has been carried out by sea.");
+    }
+}
+class VehicleFactory {
+
+    public makeNewVehicle(vehicleType: string): ITransport {
+        switch(vehicleType) {
+            case "onTheRoad": return new Truck();
+            case "byTheSea": return new Ship();
+            default: return null;
+        }
     }
 }
 
-class RoadLogistics extends Logistics {
+const vehicleFactory = new VehicleFactory();
 
-    public createTransport(): LogisticTransport {
-        return new Truck();
-    }
-}
+console.log("");
 
-class SeaLogistics extends Logistics {
+const truck = vehicleFactory.makeNewVehicle("onTheRoad")
 
-    public createTransport(): LogisticTransport {
-        return new Ship();
-    }
-}
+truck.deliver();
 
-interface LogisticTransport {
+console.log("");
 
-    deliver(): string;
-}
+const ship  = vehicleFactory.makeNewVehicle("byTheSea")
 
-class Truck implements LogisticTransport {
+ship.deliver();
 
-    public deliver(): string {
-        return "The delivery of the goods has been carried out by land.";
-    }
-}
+console.log("");
 
-class Ship implements LogisticTransport {
-
-    public deliver(): string {
-        return "The delivery of the goods has been carried out by sea.";
-    }
-}
-
-function clientCode(logistics: Logistics) {
-
-    console.log(logistics.planDelivery());
-
-}
-
-console.log('');
-
-console.log('App: Launched with the RoadLogistics.');
-
-console.log('');
-
-clientCode(new RoadLogistics());
-
-console.log('');
-
-console.log('App: Launched with the SeaLogistics.');
-
-console.log('');
-
-clientCode(new SeaLogistics());
-
-console.log('');
